@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Pedro Luiz/AndroidStudioProjects2/mvvmYoutube/app/src/main/res/drawable/ic_favorite_24.xml" value="0.1" />
+        <entry key="..\:/Users/Pedro Luiz/AndroidStudioProjects2/mvvmYoutube/app/src/main/res/drawable/ic_search_24.xml" value="0.1" />
         <entry key="..\:/Users/Pedro Luiz/AndroidStudioProjects2/mvvmYoutube/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/Pedro Luiz/AndroidStudioProjects2/mvvmYoutube/app/src/main/res/layout/item_live.xml" value="0.1" />
+        <entry key="..\:/Users/Pedro Luiz/AndroidStudioProjects2/mvvmYoutube/app/src/main/res/layout/item_live.xml" value="0.264" />
         <entry key="..\:/Users/Pedro Luiz/AndroidStudioProjects2/mvvmYoutube/app/src/main/res/menu/menu_pesquisa.xml" value="0.11302083333333333" />
       </map>
     </option>

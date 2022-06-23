@@ -8,6 +8,7 @@ import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import pedroluiz.projeto.mvvmyoutube.Repository.MainRepository
@@ -27,15 +28,11 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private val retrofitService = RetrofitService.getInstance()
 
-    private val adapter = MainAdapter{live ->
-        telaYoutube(live)
-    }
+    private val adapter = MainAdapter(
+         {live ->telaYoutube(live)}
+        ,{live ->  salvaLive(live)}
+    )
 
-    private fun telaYoutube(live: Live) {
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(live.link)
-        startActivity(intent)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +81,17 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onQueryTextChange(newText: String?): Boolean {
         viewModel.getAllSearch(newText)
         return false
+    }
+
+
+    private fun telaYoutube(live: Live) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(live.link)
+        startActivity(intent)
+    }
+    private fun salvaLive(live: Live) {
+        // binding.imvFavorite.setBackgroundColor(Color.BLACK)
+
     }
 }
 

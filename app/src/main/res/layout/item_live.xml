@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="10dp"
+                android:padding="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -59,9 +59,35 @@
                     android:text="Autor da Live"
                     android:textSize="15sp" />
 
+
             </LinearLayout>
 
+            <ImageView
+                android:id="@+id/imv_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_favorite_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/container1"
+                android:layout_marginStart="5dp"
+                android:paddingBottom="12dp"
+                />
+            <ImageView
+                android:id="@+id/img_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_video_24"
+                app:layout_constraintStart_toEndOf="@id/imv_favorite"
+                app:layout_constraintTop_toBottomOf="@+id/container1"
+                android:layout_marginStart="15dp"
+                android:paddingBottom="12dp"
+
+
+                />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     </androidx.cardview.widget.CardView>
 

@@ -4,5 +4,6 @@ data class Live (
     var title:String,
     var autor:String,
     var thumbnailUrl:String,
-    var link:String
+    var link:String,
+    var favorito:Boolean
 )

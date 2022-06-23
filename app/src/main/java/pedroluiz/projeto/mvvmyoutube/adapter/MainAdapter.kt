@@ -1,3 +1,4 @@
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +9,7 @@ import pedroluiz.projeto.mvvmyoutube.databinding.ItemLiveBinding
 import pedroluiz.projeto.mvvmyoutube.model.Live
 
 
-class MainAdapter(private val onItemClicked: (Live) -> Unit) : RecyclerView.Adapter<MainViewHolder>() {
+class MainAdapter(private val onLinkClicked: (Live) -> Unit, private val onFavoteClicked: (Live) -> Unit) : RecyclerView.Adapter<MainViewHolder>() {
 
     private var lives = mutableListOf<Live>()
 
@@ -26,7 +27,7 @@ class MainAdapter(private val onItemClicked: (Live) -> Unit) : RecyclerView.Adap
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val live = lives[position]
-        holder.bind(live, onItemClicked)
+        holder.bind(live, onLinkClicked,onFavoteClicked)
     }
 
     override fun getItemCount(): Int {
@@ -36,7 +37,7 @@ class MainAdapter(private val onItemClicked: (Live) -> Unit) : RecyclerView.Adap
 
 class MainViewHolder(val binding: ItemLiveBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(live: Live, onItemClicked: (Live) -> Unit) {
+    fun bind(live: Live, onLinkClicked: (Live) -> Unit,onFavoriteClicked: (Live) -> Unit) {
 
         binding.title.text = live.title
         binding.author.text = live.autor
@@ -50,9 +51,24 @@ class MainViewHolder(val binding: ItemLiveBinding) : RecyclerView.ViewHolder(bin
             .load(live.thumbnailUrl)
             .into(binding.thumbnail)
 
-        itemView.setOnClickListener {
-            onItemClicked(live)
+        binding.imgLink.setOnClickListener {
+            onLinkClicked(live)
         }
+
+        binding.imvFavorite.setOnClickListener {
+
+            live.favorito = !live.favorito
+
+           if(live.favorito == true){
+               binding.imvFavorite.setColorFilter(Color.RED)
+           }else{
+               binding.imvFavorite.setColorFilter(Color.BLACK)
+           }
+
+            onFavoriteClicked(live)
+        }
+
+
 
     }
 
