@@ -3,21 +3,21 @@ package pedroluiz.projeto.mvvmyoutube
 import MainAdapter
 import android.content.Intent
 import android.net.Uri
+import android.os.AsyncTask
 import android.os.Bundle
 import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import pedroluiz.projeto.mvvmyoutube.Repository.MainRepository
+import pedroluiz.projeto.mvvmyoutube.data.local.LiveDataBase
 import pedroluiz.projeto.mvvmyoutube.databinding.ActivityMainBinding
 import pedroluiz.projeto.mvvmyoutube.model.Live
-import pedroluiz.projeto.mvvmyoutube.rest.RetrofitService
+import pedroluiz.projeto.mvvmyoutube.data.remoto.rest.RetrofitService
 import pedroluiz.projeto.mvvmyoutube.viewModel.MainViewModelFactory.MainViewModelFactory
 import pedroluiz.projeto.mvvmyoutube.viewModel.main.MainViewModel
-import java.net.URL
 
 
 class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
@@ -89,8 +89,11 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         intent.data = Uri.parse(live.link)
         startActivity(intent)
     }
+
     private fun salvaLive(live: Live) {
-        // binding.imvFavorite.setBackgroundColor(Color.BLACK)
+        AsyncTask.execute(Runnable {
+            viewModel.inserirLive(live,this)
+        })
 
     }
 }

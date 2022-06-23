@@ -1,8 +1,10 @@
 package pedroluiz.projeto.mvvmyoutube.viewModel.main
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import pedroluiz.projeto.mvvmyoutube.Repository.MainRepository
+import pedroluiz.projeto.mvvmyoutube.data.local.LiveDao
 import pedroluiz.projeto.mvvmyoutube.model.Live
 import retrofit2.Call
 import retrofit2.Callback
@@ -12,6 +14,7 @@ class MainViewModel constructor(private val repository: MainRepository):ViewMode
 
     val liveList = MutableLiveData<List<Live>>()
     val liveListAPI = MutableLiveData<List<Live>>()
+    private lateinit var liveDao :LiveDao
 
     val erroMessenger = MutableLiveData<String>()
 
@@ -50,5 +53,9 @@ class MainViewModel constructor(private val repository: MainRepository):ViewMode
 
         }
 
+    }
+
+    fun inserirLive(live: Live,context: Context){
+        repository.inserirLive(live,context)
     }
 }

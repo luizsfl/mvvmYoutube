@@ -1,4 +1,4 @@
-package pedroluiz.projeto.mvvmyoutube.rest
+package pedroluiz.projeto.mvvmyoutube.data.remoto.rest
 
 import pedroluiz.projeto.mvvmyoutube.model.Live
 import retrofit2.Call

@@ -40,7 +40,7 @@ class MainViewHolder(val binding: ItemLiveBinding) : RecyclerView.ViewHolder(bin
     fun bind(live: Live, onLinkClicked: (Live) -> Unit,onFavoriteClicked: (Live) -> Unit) {
 
         binding.title.text = live.title
-        binding.author.text = live.autor
+        binding.author.text = live.author
 
         val requestOptions = RequestOptions()
             .placeholder(R.drawable.ic_launcher_background)
