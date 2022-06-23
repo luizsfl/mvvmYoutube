@@ -3,7 +3,10 @@ package pedroluiz.projeto.mvvmyoutube
 import MainAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import pedroluiz.projeto.mvvmyoutube.Repository.MainRepository
@@ -12,7 +15,7 @@ import pedroluiz.projeto.mvvmyoutube.rest.RetrofitService
 import pedroluiz.projeto.mvvmyoutube.viewModel.MainViewModelFactory.MainViewModelFactory
 import pedroluiz.projeto.mvvmyoutube.viewModel.main.MainViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private lateinit var binding : ActivityMainBinding
 
@@ -32,11 +35,7 @@ class MainActivity : AppCompatActivity() {
             MainViewModel::class.java
         )
 
-
         binding.recyclerview.adapter = adapter
-
-
-
 
     }
 
@@ -56,6 +55,23 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getAllLives()
 
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_pesquisa,menu)
+        val search = menu.findItem(R.id.menu_pesquisa).actionView as SearchView
+        search.setOnQueryTextListener(this)
+        return super.onPrepareOptionsMenu(menu)
+    }
+
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        viewModel.getAllSearch(newText)
+        return false
     }
 }
 
