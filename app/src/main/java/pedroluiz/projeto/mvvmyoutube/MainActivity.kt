@@ -1,19 +1,23 @@
 package pedroluiz.projeto.mvvmyoutube
 
 import MainAdapter
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import pedroluiz.projeto.mvvmyoutube.Repository.MainRepository
 import pedroluiz.projeto.mvvmyoutube.databinding.ActivityMainBinding
+import pedroluiz.projeto.mvvmyoutube.model.Live
 import pedroluiz.projeto.mvvmyoutube.rest.RetrofitService
 import pedroluiz.projeto.mvvmyoutube.viewModel.MainViewModelFactory.MainViewModelFactory
 import pedroluiz.projeto.mvvmyoutube.viewModel.main.MainViewModel
+import java.net.URL
+
 
 class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
@@ -23,7 +27,15 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private val retrofitService = RetrofitService.getInstance()
 
-    private val adapter = MainAdapter{}
+    private val adapter = MainAdapter{live ->
+        telaYoutube(live)
+    }
+
+    private fun telaYoutube(live: Live) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(live.link)
+        startActivity(intent)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
