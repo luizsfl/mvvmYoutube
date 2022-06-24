@@ -9,7 +9,8 @@ import pedroluiz.projeto.mvvmyoutube.databinding.ItemLiveBinding
 import pedroluiz.projeto.mvvmyoutube.model.Live
 
 
-class MainAdapter(private val onLinkClicked: (Live) -> Unit, private val onFavoteClicked: (Live) -> Unit) : RecyclerView.Adapter<MainViewHolder>() {
+class MainAdapter(private val onLinkClicked: (Live) -> Unit, private val onFavoteClicked: (Live) -> Unit)
+    : RecyclerView.Adapter<MainViewHolder>() {
 
     private var lives = mutableListOf<Live>()
 
@@ -51,25 +52,29 @@ class MainViewHolder(val binding: ItemLiveBinding) : RecyclerView.ViewHolder(bin
             .load(live.thumbnailUrl)
             .into(binding.thumbnail)
 
-        binding.imgLink.setOnClickListener {
+        binding.thumbnail.setOnClickListener {
             onLinkClicked(live)
         }
 
         binding.imvFavorite.setOnClickListener {
 
-            live.favorito = !live.favorito
+            ClickdFavorito(live, onFavoriteClicked)
+        }
+    }
 
-           if(live.favorito == true){
-               binding.imvFavorite.setColorFilter(Color.RED)
-           }else{
-               binding.imvFavorite.setColorFilter(Color.BLACK)
-           }
+    private fun ClickdFavorito(
+        live: Live,
+        onFavoriteClicked: (Live) -> Unit
+    ) {
+        live.favorito = !live.favorito
 
-            onFavoriteClicked(live)
+        if (live.favorito == true) {
+            binding.imvFavorite.setColorFilter(Color.RED)
+        } else {
+            binding.imvFavorite.setColorFilter(Color.BLACK)
         }
 
-
-
+        onFavoriteClicked(live)
     }
 
 }

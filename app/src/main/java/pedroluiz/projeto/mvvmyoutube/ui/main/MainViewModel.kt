@@ -1,4 +1,4 @@
-package pedroluiz.projeto.mvvmyoutube.viewModel.main
+package pedroluiz.projeto.mvvmyoutube.ui.main
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData

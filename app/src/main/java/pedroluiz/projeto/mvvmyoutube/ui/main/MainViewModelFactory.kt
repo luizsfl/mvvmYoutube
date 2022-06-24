@@ -1,9 +1,8 @@
-package pedroluiz.projeto.mvvmyoutube.viewModel.MainViewModelFactory
+package pedroluiz.projeto.mvvmyoutube.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import pedroluiz.projeto.mvvmyoutube.Repository.MainRepository
-import pedroluiz.projeto.mvvmyoutube.viewModel.main.MainViewModel
 
 class MainViewModelFactory constructor(private val repository: MainRepository): ViewModelProvider.Factory {
 

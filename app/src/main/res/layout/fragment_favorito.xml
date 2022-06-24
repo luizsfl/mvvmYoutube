@@ -3,12 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.FavoritoFragment">
+    tools:context=".ui.favorito.FavoritoFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Favorito" />
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_live"
+        tools:itemCount="5"
+        />
 
 </FrameLayout>
