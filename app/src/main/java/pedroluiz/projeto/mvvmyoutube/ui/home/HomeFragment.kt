@@ -1,12 +1,10 @@
 package pedroluiz.projeto.mvvmyoutube.ui.home
 
 import MainAdapter
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,17 +18,6 @@ import pedroluiz.projeto.mvvmyoutube.data.remoto.rest.RetrofitService
 import pedroluiz.projeto.mvvmyoutube.databinding.FragmentHomeBinding
 import pedroluiz.projeto.mvvmyoutube.model.Live
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -60,7 +47,6 @@ class HomeFragment : Fragment() {
 
         binding.recyclerview.adapter = adapter
 
-
         return root
 
     }
@@ -69,7 +55,8 @@ class HomeFragment : Fragment() {
         super.onStart()
 
         viewModel.liveList.observe(this, Observer { lives ->
-            adapter.setLiveList(lives)
+            val livesFavoritos = favorito(lives)
+            adapter.setLiveList(livesFavoritos)
         })
 
         viewModel.erroMessenger.observe(this, Observer { erro->
@@ -79,7 +66,9 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getAllLives()
+        AsyncTask.execute(Runnable {
+            viewModel.getAllLives(requireContext())
+        })
     }
 
 
@@ -91,8 +80,19 @@ class HomeFragment : Fragment() {
 
     private fun salvaLive(live: Live) {
         AsyncTask.execute(Runnable {
-          //  viewModel.inserirLive(live,this)
+           viewModel.inserirLive(live,requireContext())
         })
+
+    }
+
+    private fun favorito(lives: List<Live>) :List<Live>{
+        var listfavoritos  = lives
+        AsyncTask.execute(Runnable {
+            for (indice in listfavoritos.indices) {
+                listfavoritos[indice].favorito = viewModel.isFavorito(listfavoritos[indice], requireContext())
+            }
+        })
+    return listfavoritos
     }
 
     override fun onDestroyView() {

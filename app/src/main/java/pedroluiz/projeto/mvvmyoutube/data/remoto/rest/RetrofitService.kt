@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 interface  RetrofitService {
-
+    // LINK: https://d3c0cr0sze1oo6.cloudfront.net/lista-lives.json
     @GET("lista-lives.json")
     fun getAllLives(): Call<List<Live>>
 

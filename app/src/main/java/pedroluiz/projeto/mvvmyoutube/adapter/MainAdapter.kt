@@ -15,7 +15,6 @@ class MainAdapter(private val onLinkClicked: (Live) -> Unit, private val onFavot
     private var lives = mutableListOf<Live>()
 
     fun setLiveList(lives: List<Live>) {
-
         this.lives = lives.toMutableList()
         notifyDataSetChanged()
     }
@@ -54,6 +53,12 @@ class MainViewHolder(val binding: ItemLiveBinding) : RecyclerView.ViewHolder(bin
 
         binding.thumbnail.setOnClickListener {
             onLinkClicked(live)
+        }
+
+        if (live.favorito == true) {
+            binding.imvFavorite.setColorFilter(Color.RED)
+        } else {
+            binding.imvFavorite.setColorFilter(Color.BLACK)
         }
 
         binding.imvFavorite.setOnClickListener {
