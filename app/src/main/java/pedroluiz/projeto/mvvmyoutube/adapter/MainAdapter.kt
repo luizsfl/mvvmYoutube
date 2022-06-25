@@ -43,8 +43,8 @@ class MainViewHolder(val binding: ItemLiveBinding) : RecyclerView.ViewHolder(bin
         binding.author.text = live.author
 
         val requestOptions = RequestOptions()
-            .placeholder(R.drawable.ic_launcher_background)
-            .error(R.drawable.ic_launcher_background)
+            .placeholder(R.drawable.ic_launcher_foreground)
+            .error(R.drawable.ic_launcher_foreground)
 
         Glide.with(itemView.context)
             .applyDefaultRequestOptions(requestOptions)

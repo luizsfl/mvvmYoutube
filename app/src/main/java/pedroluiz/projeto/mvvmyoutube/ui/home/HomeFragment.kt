@@ -5,14 +5,15 @@ import android.content.Intent
 import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import pedroluiz.projeto.mvvmyoutube.R
 import pedroluiz.projeto.mvvmyoutube.Repository.MainRepository
 import pedroluiz.projeto.mvvmyoutube.data.remoto.rest.RetrofitService
 import pedroluiz.projeto.mvvmyoutube.databinding.FragmentHomeBinding
@@ -46,6 +47,19 @@ class HomeFragment : Fragment() {
         )
 
         binding.recyclerview.adapter = adapter
+
+        binding.searchNews.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                viewModel.getAllSearch(newText)
+                return false
+            }
+        })
+
 
         return root
 
